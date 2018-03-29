@@ -232,19 +232,19 @@
         }
         var userformdata = this.userformrequirementsfront
         console.log(userformdata)
-        // this.$http.post('http://localhost:3000/formgenerateddata', userformdata, {headers: {'Content-type': 'application/json'}})
-        //   .then(
-        //     response => {
-        //       var mainresponse = response.data
-        //       console.log(mainresponse)
-        //       // if (mainresponse !== 'success') {
-        //       //   alert('Pl')
-        //       // } else {
-        //       //   location.href = '/'
-        //       // }
-        //     }, error => {
-        //       console.log(error)
-        //     })
+        this.$http.post('http://localhost:3000/formgenerateddata', userformdata, {headers: {'Content-type': 'application/json'}})
+          .then(
+            response => {
+              var mainresponse = response.data
+              console.log(mainresponse)
+              // if (mainresponse !== 'success') {
+              //   alert('Pl')
+              // } else {
+              //   location.href = '/'
+              // }
+            }, error => {
+              console.log(error)
+            })
       },
       descriptionData: function () {
         this.userformrequirementsfront.values[0].key = 'sainath'

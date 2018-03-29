@@ -16,6 +16,34 @@
           <b-col class="left_frame" cols="2" align="center"></b-col>
           <b-col class="right_frame col-md-8">
             <b-container>
+              <!-- form description data-->
+              <b-button v-b-modal.descmodel type="submit" variant="success">Form Description</b-button>
+              <b-modal ref="descmodel" id="descmodel" hide-footer hide-header>
+
+                <div class="headerpopupquestion"> Form Description</div>
+                <hr/>
+
+                <div class="popupquestion"> Name of the Form</div>
+                <b-form-group>
+                  <b-form-input type="text" v-model="formformname"></b-form-input>
+                </b-form-group>
+
+                <div class="popupquestion"> Description</div>
+                <b-form-group>
+                  <b-form-textarea :rows="3" :max-rows="6" v-model="formformdescription"></b-form-textarea>
+                </b-form-group>
+
+                <div class="popupquestion"> Date & Time</div>
+                <b-form-group>
+                  <b-form-input type="text" disabled v-model="formdateandtime"></b-form-input>
+                </b-form-group>
+
+
+                <b-button class="float-right" type="submit" variant="success" @click="descriptionData()">Submit</b-button>
+
+              </b-modal>
+              <br/>
+
               <b-card>
                 <b-card v-for="(form,index) in forms" :key="index">
 
@@ -43,21 +71,21 @@
                     <!-- button -->
                     <div v-else-if="form.data === 'button'">
                       <b-form-group v-bind:label="form.name">
-                        <b-form-radio-group :options="form.field"></b-form-radio-group>
+                        <b-form-radio-group :options="form.field" disabled></b-form-radio-group>
                       </b-form-group>
                     </div>
 
                     <!-- checkbox -->
                     <div v-else-if="form.data === 'checkbox'">
                       <b-form-group v-bind:label="form.name">
-                        <b-form-checkbox-group :options="form.field"></b-form-checkbox-group>
+                        <b-form-checkbox-group :options="form.field" disabled></b-form-checkbox-group>
                       </b-form-group>
                     </div>
 
                     <!-- select box -->
                     <div v-else-if="form.data === 'select'">
                       <b-form-group v-bind:label="form.name">
-                        <b-form-select :options="form.field"></b-form-select>
+                        <b-form-select :options="form.field" disabled></b-form-select>
                       </b-form-group>
                     </div>
 
@@ -107,6 +135,7 @@
                   </b-modal>
                 </div>
               </b-card>
+
             </b-container>
           </b-col>
         </b-row>
@@ -150,12 +179,12 @@
         flag: true,
         // final upload data
         userformrequirementsfront: {
-          key: 'mainthing',
+          key: '',
           values: [{
-            creatorName: 'mainthing',
-            formName: 'mainthing',
-            formDescription: 'mainthing',
-            formgeneratedDate: 'mainthing',
+            creatorName: '',
+            formName: '',
+            formDescription: '',
+            formgeneratedDate: '',
             formgeneratedData: [{
               _id: '',
               text: [
@@ -170,7 +199,10 @@
               ]
             }]
           }]
-        }
+        },
+        formformname: '',
+        formformdescription: '',
+        formdateandtime: new Date().toLocaleString()
       }
     },
     watch: {
@@ -198,21 +230,31 @@
             this.userformrequirementsfront.values[0].formgeneratedData[0].select.push(this.forms[i])
           }
         }
-        console.log(this.userformrequirementsfront.values[0].creatorName)
         var userformdata = this.userformrequirementsfront
-        this.$http.post('http://localhost:3000/formgenerateddata', userformdata, {headers: {'Content-type': 'application/json'}})
-          .then(
-            response => {
-              var mainresponse = response.data
-              console.log(mainresponse)
-              // if (mainresponse !== 'success') {
-              //   alert('Pl')
-              // } else {
-              //   location.href = '/'
-              // }
-            }, error => {
-              console.log(error)
-            })
+        console.log(userformdata)
+        // this.$http.post('http://localhost:3000/formgenerateddata', userformdata, {headers: {'Content-type': 'application/json'}})
+        //   .then(
+        //     response => {
+        //       var mainresponse = response.data
+        //       console.log(mainresponse)
+        //       // if (mainresponse !== 'success') {
+        //       //   alert('Pl')
+        //       // } else {
+        //       //   location.href = '/'
+        //       // }
+        //     }, error => {
+        //       console.log(error)
+        //     })
+      },
+      descriptionData: function () {
+        this.userformrequirementsfront.values[0].key = 'sainath'
+        this.userformrequirementsfront.values[0].creatorName = 'sainath'
+        this.userformrequirementsfront.values[0].formName = this.formformname
+        this.userformrequirementsfront.values[0].formDescription = this.formformdescription
+        this.userformrequirementsfront.values[0].formgeneratedDate = this.formdateandtime
+        var mainiddata = 'sainath' + this.formformname
+        this.userformrequirementsfront.values[0].formgeneratedData[0]._id = mainiddata
+        this.$refs.descmodel.hide()
       },
       closePopup: function () {
         this.$refs.mainmodel.hide()
@@ -355,35 +397,3 @@
     }
   }
 </style>
-
-
-<!--
-  var userformrequirements = {
-    key: request.body.creatorname,
-    values: [{
-      creatorName: request.body.creatorname,
-      formName: "something else",
-      formDescription: "somethong you want to",
-      formgeneratedDate: "31-01-2018",
-      formgeneratedData: [{
-        _id: "sainath",
-        textfield: [
-          {
-            _id: "firstname"
-          },
-          {
-            _id: "firstname"
-          },
-          {
-            _id: "firstname"
-          }
-        ],
-        password: [
-          {
-            _id: "password"
-          }
-        ]
-      }]
-    }]
-  }
--->

@@ -17,8 +17,8 @@
           <b-col class="right_frame col-md-8">
             <b-container>
               <!-- form description data-->
-              <b-button v-b-modal.descmodel type="submit" variant="success">Form Description</b-button>
-              <b-modal ref="descmodel" id="descmodel" hide-footer hide-header>
+              <b-button @click="showmodel()" type="submit" variant="success">Form Description</b-button>
+              <b-modal ref="descmodel" v-model="descdatamodel" hide-footer hide-header>
 
                 <div class="headerpopupquestion"> Form Description</div>
                 <hr/>
@@ -202,7 +202,8 @@
         },
         formformname: '',
         formformdescription: '',
-        formdateandtime: new Date().toLocaleString()
+        formdateandtime: new Date().toLocaleString(),
+        descdatamodel: true
       }
     },
     watch: {
@@ -215,6 +216,9 @@
       }
     },
     methods: {
+      showmodel: function () {
+        this.descdatamodel = true
+      },
       finalsubmitenterdata: function () {
         console.log(this.forms)
         for (var i = 0; i < this.forms.length; i = i + 1) {
@@ -247,7 +251,7 @@
             })
       },
       descriptionData: function () {
-        this.userformrequirementsfront.values[0].key = 'sainath'
+        this.userformrequirementsfront.key = 'sainath'
         this.userformrequirementsfront.values[0].creatorName = 'sainath'
         this.userformrequirementsfront.values[0].formName = this.formformname
         this.userformrequirementsfront.values[0].formDescription = this.formformdescription

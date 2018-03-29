@@ -113,7 +113,7 @@
     methods: {
       regiatrationSubmit: function (event) {
         event.preventDefault()
-        alert(JSON.stringify(this.form))
+        // alert(JSON.stringify(this.form))
         let registrationmaindata = {
           firstname: this.form.firstName,
           lastname: this.form.lastName,

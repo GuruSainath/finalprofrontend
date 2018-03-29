@@ -2,9 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import login from '@/components/login'
 import registration from '@/components/registration'
-import form from '@/components/form'
 import home from '@/components/Home'
-import example from '@/components/example'
 import index from '@/components/index'
 import mainform from '@/components/MainForm'
 import dynamic from '@/components/DynamicForm'
@@ -30,19 +28,9 @@ export default new Router({
       component: registration
     },
     {
-      path: '/form',
-      name: 'form',
-      component: form
-    },
-    {
       path: '/home',
       name: 'home',
       component: home
-    },
-    {
-      path: '/example',
-      name: 'example',
-      component: example
     },
     {
       path: '/mainform',

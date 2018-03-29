@@ -76,7 +76,7 @@
     methods: {
       onSubmit: function (event) {
         event.preventDefault()
-        alert(JSON.stringify(this.form))
+        // alert(JSON.stringify(this.form))
         let maindata = {
           gmail: this.form.email,
           password: this.form.password
@@ -86,6 +86,11 @@
             response => {
               var mainresponse = response.data
               console.log(mainresponse)
+              if (mainresponse !== 'success') {
+                alert('Pl')
+              } else {
+                location.href = '/home'
+              }
             }, error => {
               console.log(error)
             })

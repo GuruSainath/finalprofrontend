@@ -94,11 +94,11 @@
 
                 <br/>
 
-                <b-button v-b-modal.mainmodel type="submit" variant="success">Add Question</b-button>
+                <b-button type="submit" variant="success" @click="addquestionmainmodel()">Add Question</b-button>
                 <b-button class="float-right" type="submit" variant="success" @click="finalsubmitenterdata"> Submit </b-button>
 
                 <div>
-                  <b-modal ref="mainmodel" id="mainmodel" hide-footer hide-header>
+                  <b-modal ref="mainmodel" v-model="addquestionmodel" hide-footer hide-header>
 
                     <div class="headerpopupquestion"> Enter Your Question</div>
                     <hr/>
@@ -203,7 +203,8 @@
         formformname: '',
         formformdescription: '',
         formdateandtime: new Date().toLocaleString(),
-        descdatamodel: true
+        descdatamodel: true,
+        addquestionmodel: false
       }
     },
     watch: {
@@ -218,6 +219,14 @@
     methods: {
       showmodel: function () {
         this.descdatamodel = true
+      },
+      addquestionmainmodel: function () {
+        if (this.formformname === '' || this.formformdescription === '') {
+          this.$refs.descmodel.show()
+          alert('Please fill form description')
+        } else {
+          this.addquestionmodel = true
+        }
       },
       finalsubmitenterdata: function () {
         console.log(this.forms)
@@ -258,7 +267,12 @@
         this.userformrequirementsfront.values[0].formgeneratedDate = this.formdateandtime
         var mainiddata = 'sainath' + this.formformname
         this.userformrequirementsfront.values[0].formgeneratedData[0]._id = mainiddata
-        this.$refs.descmodel.hide()
+        if (this.formformname === '' || this.formformdescription === '') {
+          alert('please fill the fields')
+          this.$refs.descmodel.show()
+        } else {
+          this.$refs.descmodel.hide()
+        }
       },
       closePopup: function () {
         this.$refs.mainmodel.hide()

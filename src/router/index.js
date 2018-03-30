@@ -5,7 +5,7 @@ import registration from '@/components/registration'
 import home from '@/components/Home'
 import index from '@/components/index'
 import mainform from '@/components/MainForm'
-import dynamic from '@/components/DynamicForm'
+import output from '@/components/formdataoutput'
 
 Vue.use(Router)
 
@@ -37,11 +37,10 @@ export default new Router({
       name: 'mainform',
       component: mainform
     },
-    // nothing imp just for checking
     {
-      path: '/dynamic',
-      name: 'dynamic',
-      component: dynamic
+      path: '/output',
+      name: 'output',
+      component: output
     }
   ]
 })

@@ -5,7 +5,6 @@ import App from './App'
 import router from './router'
 import createregistration from '@/components/CreateRegistration'
 import pastregistration from '@/components/PastRegistration'
-import dynamicform from '@/components/DynamicForm'
 import BootstrapVue from 'bootstrap-vue'
 import vueResource from 'vue-resource'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -27,7 +26,6 @@ Vue.config.productionTip = false
 
 Vue.component('Create-Registration', createregistration)
 Vue.component('Past-Registration', pastregistration)
-Vue.component('dynamic-form', dynamicform)
 
 new Vue({
   el: '#app',

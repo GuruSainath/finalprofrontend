@@ -229,35 +229,40 @@
         }
       },
       finalsubmitenterdata: function () {
-        console.log(this.forms)
-        for (var i = 0; i < this.forms.length; i = i + 1) {
-          if (this.forms[i].data === 'text') {
-            this.userformrequirementsfront.values[0].formgeneratedData[0].text.push(this.forms[i])
-          } else if (this.forms[i].data === 'textarea') {
-            this.userformrequirementsfront.values[0].formgeneratedData[0].textarea.push(this.forms[i])
-          } else if (this.forms[i].data === 'button') {
-            this.userformrequirementsfront.values[0].formgeneratedData[0].button.push(this.forms[i])
-          } else if (this.forms[i].data === 'checkbox') {
-            this.userformrequirementsfront.values[0].formgeneratedData[0].checkbox.push(this.forms[i])
-          } else if (this.forms[i].data === 'select') {
-            this.userformrequirementsfront.values[0].formgeneratedData[0].select.push(this.forms[i])
+        // console.log(this.forms)
+        if (this.formformname === '' || this.formformdescription === '') {
+          this.$refs.descmodel.show()
+          alert('Please fill form description')
+        } else {
+          for (var i = 0; i < this.forms.length; i = i + 1) {
+            if (this.forms[i].data === 'text') {
+              this.userformrequirementsfront.values[0].formgeneratedData[0].text.push(this.forms[i])
+            } else if (this.forms[i].data === 'textarea') {
+              this.userformrequirementsfront.values[0].formgeneratedData[0].textarea.push(this.forms[i])
+            } else if (this.forms[i].data === 'button') {
+              this.userformrequirementsfront.values[0].formgeneratedData[0].button.push(this.forms[i])
+            } else if (this.forms[i].data === 'checkbox') {
+              this.userformrequirementsfront.values[0].formgeneratedData[0].checkbox.push(this.forms[i])
+            } else if (this.forms[i].data === 'select') {
+              this.userformrequirementsfront.values[0].formgeneratedData[0].select.push(this.forms[i])
+            }
           }
+          var userformdata = this.userformrequirementsfront
+          console.log(userformdata)
+          this.$http.post('http://localhost:3000/formgenerateddata', userformdata, {headers: {'Content-type': 'application/json'}})
+            .then(
+              response => {
+                var mainresponse = response.data
+                console.log(mainresponse)
+                // if (mainresponse !== 'success') {
+                //   alert('Pl')
+                // } else {
+                //   location.href = '/'
+                // }
+              }, error => {
+                console.log(error)
+              })
         }
-        var userformdata = this.userformrequirementsfront
-        console.log(userformdata)
-        this.$http.post('http://localhost:3000/formgenerateddata', userformdata, {headers: {'Content-type': 'application/json'}})
-          .then(
-            response => {
-              var mainresponse = response.data
-              console.log(mainresponse)
-              // if (mainresponse !== 'success') {
-              //   alert('Pl')
-              // } else {
-              //   location.href = '/'
-              // }
-            }, error => {
-              console.log(error)
-            })
       },
       descriptionData: function () {
         this.userformrequirementsfront.key = 'sainath'

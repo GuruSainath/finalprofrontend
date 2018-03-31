@@ -11,6 +11,15 @@
         </b-navbar>
       </div>
     </div>
+
+    <b-container fluid class="form_main_data_container">
+      <b-row>
+        <b-col class="left_frame" cols="2" align="center"></b-col>
+        <b-col class="right_frame col-md-8">
+          hi this is sainath
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
@@ -44,5 +53,17 @@
   .index_header {
     color: white;
     font-size: 125%;
+  }
+  .form_main_data_container {
+    max-height: 80%;
+  }
+  .left_frame {
+    min-height: 80vh;
+    height: 100%;
+  }
+  .right_frame {
+    border: 0px solid black;
+    box-shadow: 0px 0px 10px black;
+    padding-top: 30px;
   }
 </style>

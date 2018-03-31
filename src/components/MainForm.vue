@@ -265,18 +265,34 @@
         }
       },
       descriptionData: function () {
-        this.userformrequirementsfront.key = 'sainath'
-        this.userformrequirementsfront.values[0].creatorName = 'sainath'
-        this.userformrequirementsfront.values[0].formName = this.formformname
-        this.userformrequirementsfront.values[0].formDescription = this.formformdescription
-        this.userformrequirementsfront.values[0].formgeneratedDate = this.formdateandtime
-        var mainiddata = 'sainath' + this.formformname
-        this.userformrequirementsfront.values[0].formgeneratedData[0]._id = mainiddata
         if (this.formformname === '' || this.formformdescription === '') {
           alert('please fill the fields')
           this.$refs.descmodel.show()
         } else {
-          this.$refs.descmodel.hide()
+          var formNameName = {
+            formname: this.formformname,
+            username: 'sainath'
+          }
+          this.$http.post('http://localhost:3000/formcheckdata', formNameName, {headers: {'Content-type': 'application/json'}})
+            .then(
+              response => {
+                var mainresponse = response.data
+                console.log(mainresponse)
+                if (mainresponse !== 'success') {
+                  alert('formname already exists please change the form name')
+                } else {
+                  this.userformrequirementsfront.key = 'sainath'
+                  this.userformrequirementsfront.values[0].creatorName = 'sainath'
+                  this.userformrequirementsfront.values[0].formName = this.formformname
+                  this.userformrequirementsfront.values[0].formDescription = this.formformdescription
+                  this.userformrequirementsfront.values[0].formgeneratedDate = this.formdateandtime
+                  var mainiddata = this.userformrequirementsfront.values[0].creatorName + this.formformname
+                  this.userformrequirementsfront.values[0].formgeneratedData[0]._id = mainiddata
+                  this.$refs.descmodel.hide()
+                }
+              }, error => {
+                console.log(error)
+              })
         }
       },
       closePopup: function () {

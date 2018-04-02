@@ -278,17 +278,26 @@
               response => {
                 var mainresponse = response.data
                 console.log(mainresponse)
-                if (mainresponse !== 'success') {
-                  alert('formname already exists please change the form name')
-                } else {
+                if (mainresponse === 'notFind') {
                   this.userformrequirementsfront.key = 'sainath'
                   this.userformrequirementsfront.values[0].creatorName = 'sainath'
                   this.userformrequirementsfront.values[0].formName = this.formformname
                   this.userformrequirementsfront.values[0].formDescription = this.formformdescription
                   this.userformrequirementsfront.values[0].formgeneratedDate = this.formdateandtime
-                  var mainiddata = this.userformrequirementsfront.values[0].creatorName + this.formformname
-                  this.userformrequirementsfront.values[0].formgeneratedData[0]._id = mainiddata
+                  this.userformrequirementsfront.values[0].formgeneratedData[0]._id = this.formformname
                   this.$refs.descmodel.hide()
+                } else {
+                  if (mainresponse !== 'success') {
+                    alert('formname already exists please change the form name')
+                  } else {
+                    this.userformrequirementsfront.key = 'sainath'
+                    this.userformrequirementsfront.values[0].creatorName = 'sainath'
+                    this.userformrequirementsfront.values[0].formName = this.formformname
+                    this.userformrequirementsfront.values[0].formDescription = this.formformdescription
+                    this.userformrequirementsfront.values[0].formgeneratedDate = this.formdateandtime
+                    this.userformrequirementsfront.values[0].formgeneratedData[0]._id = this.formformname
+                    this.$refs.descmodel.hide()
+                  }
                 }
               }, error => {
                 console.log(error)

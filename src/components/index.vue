@@ -35,6 +35,16 @@
   export default {
     data () {
       return {}
+    },
+    methods: {
+      mainfunction: function () {
+        if (localStorage.getItem('UserName') != null) {
+          location.href = '/home'
+        }
+      }
+    },
+    created: function () {
+      this.mainfunction()
     }
   }
 </script>
@@ -55,7 +65,7 @@
   .caption {
     position: absolute;
     left: 0;
-    top: 43%;
+    top: 40%;
     width: 100%;
     text-align: center;
     color: #000;

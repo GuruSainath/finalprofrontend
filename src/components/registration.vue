@@ -11,9 +11,6 @@
       <b-container class="mt-4 mb-4">
         <b-row>
           <b-col md="7">
-
-            One account is all you need
-
           </b-col>
           <b-col md="5" class="registration_main_container">
             <div class="sign_up_container">
@@ -111,6 +108,11 @@
     },
     // functionalities in functions
     methods: {
+      mainfunction: function () {
+        if (localStorage.getItem('UserName') != null) {
+          location.href = '/home'
+        }
+      },
       regiatrationSubmit: function (event) {
         event.preventDefault()
         // alert(JSON.stringify(this.form))
@@ -132,10 +134,11 @@
               if (mainresponse !== 'success') {
                 alert('Pl')
               } else {
-                location.href = '/'
+                location.href = '/login'
               }
             }, error => {
               console.log(error)
+              alert('pleace check your network connection')
             })
       },
       regiatrationReset: function (event) {
@@ -155,6 +158,9 @@
           this.show = true
         })
       }
+    },
+    created: function () {
+      this.mainfunction()
     }
   }
 </script>

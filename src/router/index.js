@@ -6,6 +6,7 @@ import home from '@/components/Home'
 import index from '@/components/index'
 import mainform from '@/components/MainForm'
 import output from '@/components/formdataoutput'
+import enduser from '@/components/enduserdata'
 
 Vue.use(Router)
 
@@ -41,6 +42,12 @@ export default new Router({
       path: '/output',
       name: 'output',
       component: output
+    },
+    // end user path
+    {
+      path: '/data',
+      name: 'enduser',
+      component: enduser
     }
   ]
 })

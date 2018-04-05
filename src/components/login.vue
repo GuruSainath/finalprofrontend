@@ -27,17 +27,9 @@
                   <b-form @submit="onSubmit" v-if="show">  <!-- @reset="onReset" -->
                     <b-form-group label="Email address" label-for="email" >
                        <b-form-input id="email" type="email" v-model="form.email" required placeholder="Enter your email" style="background-color: rgba(0, 0, 0, 0.79);color: white"></b-form-input>
-                      <!--<md-input-container>-->
-                        <!--<label style="color: white;">Enter your email</label>-->
-                        <!--<md-input type="email" v-model="form.email" class="data"></md-input>-->
-                      <!--</md-input-container>-->
                     </b-form-group>
                     <b-form-group label="Password" label-for="password">
                        <b-form-input id="password" type="password" v-model="form.password" required placeholder="Enter your password" style="background-color: rgba(0, 0, 0, 0.79);color: white"></b-form-input>
-                      <!--<md-input-container>-->
-                        <!--<label style="color: white;">Enter your password</label>-->
-                        <!--<md-input type="password" v-model="form.password" class="data"></md-input>-->
-                      <!--</md-input-container>-->
                     </b-form-group>
                     <div align="right">
                       <b-button type="submit" variant="primary sm" class="mt-2 mb-3" >Submit</b-button>
@@ -74,9 +66,13 @@
       }
     },
     methods: {
+      mainfunction: function () {
+        if (localStorage.getItem('UserName') != null) {
+          location.href = '/home'
+        }
+      },
       onSubmit: function (event) {
         event.preventDefault()
-        // alert(JSON.stringify(this.form))
         let maindata = {
           gmail: this.form.email,
           password: this.form.password
@@ -87,14 +83,19 @@
               var mainresponse = response.data
               console.log(mainresponse)
               if (mainresponse !== 'success') {
-                alert('Pl')
+                alert('Please check your username and password')
               } else {
+                localStorage.setItem('UserName', maindata.gmail)
                 location.href = '/home'
               }
             }, error => {
               console.log(error)
+              alert('please check your internet connection')
             })
       }
+    },
+    created: function () {
+      this.mainfunction()
     }
   }
 </script>

@@ -2,6 +2,7 @@
   <div class="body">
     <!-- header -->
     <div>
+      <b-button class="float-right" type="submit" variant="success" @click="logOut()">Close</b-button>
       <b-navbar toggleable="md" variant="faded" type="light" class="index_main_header">
         <b-container class="index_header_container">
           <b-navbar-brand>
@@ -45,8 +46,25 @@
   export default {
     data () {
       return {
-        status: true
+        status: true,
+        mainimpparseddata: ''
       }
+    },
+    methods: {
+      logOut: function () {
+        localStorage.removeItem('UserName')
+        location.reload()
+      },
+      mainfunction: function () {
+        if (localStorage.getItem('UserName') === null) {
+          location.href = '/login'
+        } else {
+          this.mainimpparseddata = localStorage.getItem('UserName')
+        }
+      }
+    },
+    created: function () {
+      this.mainfunction()
     }
   }
 </script>

@@ -9,11 +9,14 @@ import BootstrapVue from 'bootstrap-vue'
 import vueResource from 'vue-resource'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import 'vue-material/dist/vue-material.css'
+import VueClipboard from 'vue-clipboard2'
+// import 'vue-material/dist/vue-material.css'
 
-var VueMaterial = require('vue-material')
+// var VueMaterial = require('vue-material')
 
-Vue.use(VueMaterial)
+// Vue.use(VueMaterial)
+
+Vue.use(VueClipboard)
 
 Vue.use(BootstrapVue)
 Vue.use(vueResource)

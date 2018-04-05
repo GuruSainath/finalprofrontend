@@ -217,6 +217,17 @@
       }
     },
     methods: {
+      logOut: function () {
+        localStorage.removeItem('UserName')
+        location.reload()
+      },
+      mainfunction: function () {
+        if (localStorage.getItem('UserName') === null) {
+          location.href = '/login'
+        } else {
+          // this.mainimpparseddata = localStorage.getItem('UserName')
+        }
+      },
       showmodel: function () {
         this.descdatamodel = true
       },
@@ -381,6 +392,9 @@
           }
         }
       }
+    },
+    created: function () {
+      this.mainfunction()
     }
   }
 </script>

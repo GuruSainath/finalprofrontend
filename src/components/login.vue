@@ -20,7 +20,7 @@
                 </div>
                 <br/>
                 <div class="mt-5 mb-5">
-                  <div style="font-size: 150%; float: left;">Sign in</div><br/>
+                  <div style="font-size: 150%; float: left;">Sign in</div><br/><br/>
                   <div style="font-size: 90%; float: left;">to continue to {{mainheader}}</div>
                 </div>
                 <div class="mb-5 mt-4" style="text-align: left;">

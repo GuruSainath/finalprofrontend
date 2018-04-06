@@ -6,7 +6,7 @@
       <b-navbar toggleable="md" variant="faded" type="light" class="index_main_header">
         <b-container class="index_header_container">
           <b-navbar-brand>
-            <router-link to="/"><span class="index_header">Scalable Forms</span></router-link>
+            <router-link to="/home"><span class="index_header">Scalable Forms</span></router-link>
           </b-navbar-brand>
         </b-container>
       </b-navbar>
@@ -18,9 +18,9 @@
     <div class="navigation_internally">
       <b-container>
         <b-row class="justify-content-md-center">
-          <b-col class="column" @click="status = true" :class="{'nav_color': status}">Create Forms</b-col>
+          <b-col class="column" @click="status = true" :class="{'nav_color': status}">Template Gallery</b-col>
           <b-col class="column" @click="status = false" :class="{'nav_color': !status}">Past Forms</b-col>
-          <b-col class="column Last_column">Created a New Form</b-col>
+          <b-col class="column Last_column" @click="nextpage()">Created a New Form</b-col>
         </b-row>
       </b-container>
     </div>
@@ -28,15 +28,15 @@
     <!-- redirecting the components-->
     <div>
       <div v-if="status">
-        <Create-Registration></Create-Registration>
+        <b-container>
+          <Create-Registration></Create-Registration>
+        </b-container>
       </div>
       <div v-else>
-        <Past-Registration></Past-Registration>
+        <b-container>
+          <Past-Registration></Past-Registration>
+        </b-container>
       </div>
-    </div>
-
-    <div class="components_field">
-
     </div>
 
   </div>
@@ -53,7 +53,11 @@
     methods: {
       logOut: function () {
         localStorage.removeItem('UserName')
+        localStorage.removeItem('secondUserName')
         location.reload()
+      },
+      nextpage: function () {
+        location.href = '/mainform'
       },
       mainfunction: function () {
         if (localStorage.getItem('UserName') === null) {
@@ -73,7 +77,9 @@
   .body {
     background-color: rgba(0, 0, 0, 0.75);
     width: 100%;
-    height: 100vh;
+    /*height: 100vh;*/
+    min-height: 100vh;
+    max-height: 100%;
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -92,24 +98,19 @@
   }
   .navigation_internally {
     width: 100%;
-    height: 10vh;
-    background-color: rgba(0,0,0,0.45);
     border-top: 1px solid white;
+    border-bottom: 1px solid white;
     text-align: center;
+    background-color: rgba(0,0,0,0.45);
   }
   .navigation_internally .column{
-    height: 10vh;
-    font-size: 130%;
+    height: 10%;
+    font-size: 100%;
     line-height: 3.5;
     color: white;
     cursor: pointer;
   }
-  .navigation_internally .column:hover{
-    font-size: 132%;
-    border-bottom: 1px solid white;
-  }
   .nav_color {
-    border-bottom: 1px solid white;
     box-shadow: 0px 0px 0.1px white;
     background-color: rgba(255,255,255,0.12);
   }

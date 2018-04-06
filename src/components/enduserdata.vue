@@ -28,7 +28,7 @@
                         <!-- textarea -->
                         <div v-if="form.data === 'textarea'">
                           <b-form-group v-bind:label="form.name" class="labels">
-                            <b-form-textarea v-bind:type="form.field" v-bind:name="form.name" :rows="3" :max-rows="6"></b-form-textarea>
+                            <b-form-textarea v-bind:name="form.name" :rows="3" :max-rows="6"></b-form-textarea>
                           </b-form-group>
                         </div>
                         <!-- button -->

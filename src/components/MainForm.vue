@@ -5,7 +5,7 @@
         <b-navbar toggleable="md" variant="faded" type="light" class="index_main_header">
           <b-container class="index_header_container">
             <b-navbar-brand>
-              <router-link to="/"><span class="index_header">Scalable Forms</span></router-link>
+              <router-link to="/home"><span class="index_header">Scalable Forms</span></router-link>
             </b-navbar-brand>
           </b-container>
         </b-navbar>
@@ -219,6 +219,7 @@
     methods: {
       logOut: function () {
         localStorage.removeItem('UserName')
+        localStorage.removeItem('secondUserName')
         location.reload()
       },
       mainfunction: function () {
@@ -265,13 +266,14 @@
               response => {
                 var mainresponse = response.data
                 console.log(mainresponse)
-                // if (mainresponse !== 'success') {
-                //   alert('Pl')
-                // } else {
-                //   location.href = '/'
-                // }
+                if (mainresponse !== 'success') {
+                  alert('Pl')
+                } else {
+                  location.href = '/home'
+                }
               }, error => {
                 console.log(error)
+                alert('please check your internet connection')
               })
         }
       },
@@ -282,7 +284,7 @@
         } else {
           var formNameName = {
             formname: this.formformname,
-            username: 'sainath'
+            username: localStorage.getItem('secondUserName')
           }
           this.$http.post('http://localhost:3000/formcheckdata', formNameName, {headers: {'Content-type': 'application/json'}})
             .then(
@@ -290,8 +292,8 @@
                 var mainresponse = response.data
                 console.log(mainresponse)
                 if (mainresponse === 'notFind') {
-                  this.userformrequirementsfront.key = 'sainath'
-                  this.userformrequirementsfront.values[0].creatorName = 'sainath'
+                  this.userformrequirementsfront.key = localStorage.getItem('secondUserName')
+                  this.userformrequirementsfront.values[0].creatorName = localStorage.getItem('secondUserName')
                   this.userformrequirementsfront.values[0].formName = this.formformname
                   this.userformrequirementsfront.values[0].formDescription = this.formformdescription
                   this.userformrequirementsfront.values[0].formgeneratedDate = this.formdateandtime
@@ -301,8 +303,8 @@
                   if (mainresponse !== 'success') {
                     alert('formname already exists please change the form name')
                   } else {
-                    this.userformrequirementsfront.key = 'sainath'
-                    this.userformrequirementsfront.values[0].creatorName = 'sainath'
+                    this.userformrequirementsfront.key = localStorage.getItem('secondUserName')
+                    this.userformrequirementsfront.values[0].creatorName = localStorage.getItem('secondUserName')
                     this.userformrequirementsfront.values[0].formName = this.formformname
                     this.userformrequirementsfront.values[0].formDescription = this.formformdescription
                     this.userformrequirementsfront.values[0].formgeneratedDate = this.formdateandtime

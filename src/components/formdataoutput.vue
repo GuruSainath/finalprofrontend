@@ -5,7 +5,7 @@
         <b-navbar toggleable="md" variant="faded" type="light" class="index_main_header">
           <b-container class="index_header_container">
             <b-navbar-brand>
-              <router-link to="/"><span class="index_header">Scalable Forms</span></router-link>
+              <router-link to="/home"><span class="index_header">Scalable Forms</span></router-link>
             </b-navbar-brand>
           </b-container>
         </b-navbar>
@@ -32,7 +32,7 @@
                       </b-tab>
                       <b-tab title="Shared Link">
                         <div class="float-right">
-                          <b-button variant="outline-success" style="cursor: pointer" size="sm" v-clipboard:copy="formsharelinkid" @click="sainath()">copy</b-button>
+                          <b-button variant="outline-success" style="cursor: pointer" size="sm" v-clipboard:copy="formsharelinkid" @click="maincopyfunction()">copy</b-button>
                           <b-modal hide-header hide-footer ref="popover" style="text-align:center;font-size: 110%"> copied </b-modal>
                         </div>
                         <div><a href="#">{{ formsharelinkid }}</a></div>
@@ -109,6 +109,7 @@
     methods: {
       logOut: function () {
         localStorage.removeItem('UserName')
+        localStorage.removeItem('secondUserName')
         location.reload()
       },
       mainfunction: function () {
@@ -118,13 +119,13 @@
           // this.mainimpparseddata = localStorage.getItem('UserName')
         }
       },
-      sainath: function () {
+      maincopyfunction: function () {
         this.$refs.popover.show()
       },
       mainfunctionload: function () {
         var fornmane = this.$route.query.formname
         var userformdata = {
-          name: 'sainath',
+          name: localStorage.getItem('secondUserName'),
           form: fornmane
         }
         this.$http.post('http://localhost:3000/alltheresponses', userformdata, {headers: {'Content-type': 'application/json'}})

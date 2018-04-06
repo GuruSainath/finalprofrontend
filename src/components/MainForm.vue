@@ -7,6 +7,7 @@
             <b-navbar-brand>
               <router-link to="/home"><span class="index_header">Scalable Forms</span></router-link>
             </b-navbar-brand>
+            <b-button class="float-right" size="sm" type="submit" variant="success" @click="logOut()"> Logout </b-button>
           </b-container>
         </b-navbar>
       </div>
